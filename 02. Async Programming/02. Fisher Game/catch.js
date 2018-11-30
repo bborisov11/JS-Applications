@@ -33,10 +33,35 @@ function attachEvents() {
             <button class="delete">Delete</button>
         </div>`;
 
-                catchDiv.append(currentCatch);
-                   // console.log();
-                $($(currentCatch).html()).find(".update").on("click", updateButton());
+                    catchDiv.append(currentCatch);
+                   // console.log($($($(currentCatch).html()).find(".update")).text());
+                console.log($($(currentCatch).html()).find(".update"));
+                $($(currentCatch).find(".update")).on("click", function () {
+
+                    // let id = $(".update").closest("div").attr('data-id');
+                    const UPDATE_URL = `https://baas.kinvey.com/appdata/${appKey}/biggestCatches/${id}`;
+
+                    let data = {
+                        angler: $(`#${id} .angler`).val(),
+                        weight: $(`#${id} .weight`).val(),
+                        species: $(`#${id} .species`).val(),
+                        location: $(`#${id} .location`).val(),
+                        bait: $(`#${id} .bait`).val(),
+                        captureTime: $(`#${id} .captureTime`).val(),
+                    };
+
+                    $.ajax({
+                        method: "PUT",
+                        url: UPDATE_URL,
+                        data: data,
+                        headers: {
+                            "Authorization": autHeaders
+                        }
+                    }).then(() => console.log("successfully updated!"))
+                        .catch((err) => console.log(err));
+                });
             }
+           // $(".update").each((i, element) => $(element).on("click",updateButton(obj._id)));
         })
     });
 
@@ -63,28 +88,30 @@ function attachEvents() {
         })
     });
 
-        function updateButton() {
-            let id = $(".update").closest("div").attr('data-id');
-            const UPDATE_URL = `https://baas.kinvey.com/appdata/${appKey}/biggestCatches/${id}`;
+    function func(e, id) {
 
-            let data = {
-                angler: $(`#${id} .angler`).val(),
-                weight: $(`#${id} .weight`).val(),
-                species: $(`#${id} .species`).val(),
-                location: $(`#${id} .location`).val(),
-                bait: $(`#${id} .bait`).val(),
-                captureTime: $(`#${id} .captureTime`).val(),
-            };
+        // let id = $(".update").closest("div").attr('data-id');
+        const UPDATE_URL = `https://baas.kinvey.com/appdata/${appKey}/biggestCatches/${id}`;
 
-            $.ajax({
-                method: "PUT",
-                url: UPDATE_URL,
-                data: data,
-                headers: {
-                    "Authorization": autHeaders
-                }
-            }).then(() => console.log("successfully updated!"));
-        }
+        let data = {
+            angler: $(`#${id} .angler`).val(),
+            weight: $(`#${id} .weight`).val(),
+            species: $(`#${id} .species`).val(),
+            location: $(`#${id} .location`).val(),
+            bait: $(`#${id} .bait`).val(),
+            captureTime: $(`#${id} .captureTime`).val(),
+        };
+
+        $.ajax({
+            method: "PUT",
+            url: UPDATE_URL,
+            data: data,
+            headers: {
+                "Authorization": autHeaders
+            }
+        }).then(() => console.log("successfully updated!"))
+            .catch((err) => console.log(err));
+    }
 
     let deleteButton = $(".delete");
 
@@ -101,7 +128,7 @@ function attachEvents() {
         }).then(function () {
             $(`#${id}`).remove();
             console.log("Successfully deleted catch!");
-        });
+        }).catch((err) => console.log(err));
     })
 
 }
