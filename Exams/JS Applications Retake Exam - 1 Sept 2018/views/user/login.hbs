@@ -1,0 +1,42 @@
+<div id="login">
+    <form id="loginForm" action="#/login" method="post">
+        <div class="container">
+            <h1>Login</h1>
+            <p id="details">Please enter your credentials.</p>
+            <hr id="login-register-hr">
+
+            <p id="username">Username</p>
+            <input placeholder="Enter Username" name="username" type="text">
+
+            <p>Password</p>
+            <input type="password" placeholder="Enter Password" name="password">
+            <button type="submit" class="registerbtn">Login</button>
+        </div>
+
+        <div class="container signin">
+            <p>Dont have an account?
+                <a href="#/register">Sign up</a>.</p>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        $("#loginForm").on("submit", function (event) {
+            let isValid = true;
+
+            if (!(/^[A-Za-z]{3,}$/.test($("input[name='username']").val()))) {
+                isValid = false;
+                console.log("name field");
+            }
+            if (!(/^[A-Za-z0-9]{6,}$/.test($("input[name='password']").val()))) {
+                isValid = false;
+                console.log("value field");
+            }
+            if (!isValid) {
+                event.stopPropagation();
+                event.preventDefault();
+                notification.error("Wrong username or password");
+            }
+        })
+    })
+</script>

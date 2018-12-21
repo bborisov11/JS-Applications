@@ -1,0 +1,38 @@
+<div id="create-meme">
+    <form id="createForm" action="#/create" method="post">
+        <div class="container">
+            <h1>Create Meme</h1>
+            <p>Please fill in this form to create an meme.</p>
+
+            <p>Title</p>
+            <input type="text" placeholder="Enter Title" name="title">
+
+            <p>Description</p>
+            <input type="text" placeholder="Enter Description" name="description">
+
+            <p>Meme Image</p>
+            <input type="text" placeholder="Enter meme ImageUrl" name="imageUrl">
+
+            <button type="submit" class="registerbtn">Create Meme</button>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        $("#createForm").on("submit", function (event) {
+            let isValid = true;
+
+            if ($("input[name='title']").val().length > 33) {
+                isValid = false;
+            }
+            if ($("input[name='description']").val().length > 450 || $("input[name='description']").val().length < 30) {
+                isValid = false;
+            }
+            if (!isValid) {
+                event.preventDefault();
+                event.stopPropagation();
+                notification.error("Incorrect filled field!");
+            }
+        })
+    })
+</script>

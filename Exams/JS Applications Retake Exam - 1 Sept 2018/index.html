@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Meme Lounge</title>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="static/css/site.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="static/css/footer.css"/>
+    <link rel="stylesheet" href="static/css/login-register.css">
+    <link rel="stylesheet" href="static/css/meme-details.css">
+    <link rel="stylesheet" href="static/css/meme-feed.css">
+    <link rel="stylesheet" href="static/css/my-memes.css">
+    <link rel="stylesheet" href="static/css/navigation.css">
+    <link rel="stylesheet" href="static/css/notifications.css">
+    <link rel="stylesheet" href="static/css/user-meme-listings.css">
+    <link rel="stylesheet" href="static/css/user-profile.css">
+    <link rel="stylesheet" href="static/css/welcome.css">
+
+</head>
+<body>
+<nav>
+    <a class="active" href="#/">Home</a>
+    <a href="#/create" id="create-meme" class="d-none">Create Meme</a>
+    <div id="profile">
+        <div id="logout-option" class="d-none">
+        <a>Welcome User</a>
+        <a href="#/details">My Profile</a>
+        <a href="#/logout">logout</a>
+        </div>
+    </div>
+</nav>
+<div id="notifications">
+    <div id="loadingBox" class="notification">
+        <span>Loading …</span>
+    </div>
+    <div id="infoBox" class="notification">
+        <span>Info</span>
+    </div>
+    <div id="errorBox" class="notification">
+        <span>Error</span>
+    </div>
+</div>
+<section class="container" id="container"></section>
+<div class="footer">
+    <p>Created by MarikMayhem</p>
+</div>
+
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/popper.js/dist/popper.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="node_modules/sammy/lib/min/sammy-latest.min.js"></script>
+<script src="node_modules/sammy/lib/min/plugins/sammy.handlebars-latest.min.js"></script>
+<!-- Helpers -->
+<script src="helpers/storage.js"></script>
+<script src="helpers/requester.js"></script>
+<script src="helpers/notifications.js"></script>
+<!-- Models -->
+<script src="models/userModel.js"></script>
+<script src="models/memeModel.js"></script>
+<!-- Controllers -->
+<script src="controllers/home.js"></script>
+<script src="controllers/user.js"></script>
+<script src="controllers/meme.js"></script>
+<!-- Router -->
+<script src="app.js"></script>
+<script>
+    $(document).ajaxStart(function () {
+        $("#loadingBox").show();
+    });
+    $(document).ajaxStop(function () {
+        $("#loadingBox").hide();
+    })
+</script>
+</body>
+</html>

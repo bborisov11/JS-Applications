@@ -1,0 +1,59 @@
+<div id="register">
+    <form id="registerForm" action="#/register" method="post">
+        <div class="container">
+            <h1>Register</h1>
+            <p id="details">Please fill in this form to create an account.</p>
+            <hr id="login-register-hr">
+
+            <p id="username">Username</p>
+            <input type="text" placeholder="Enter Username" name="username">
+            <div id="usernameValidation" class="text-danger"></div>
+
+            <p>Password</p>
+            <input type="password" placeholder="Enter Password" name="password">
+            <div id="passwordValidation" class="text-danger"></div>
+
+            <p>Repeat Password</p>
+            <input type="password" placeholder="Repeat Password" name="repeatPass">
+
+            <p>Email</p>
+            <input type="email" placeholder="Enter Email" name="email">
+
+            <p>Avatar Url</p>
+            <input type="text" placeholder="Enter AvatarUrl" name="avatarUrl">
+            <hr>
+
+            <button type="submit" class="registerbtn">Register</button>
+        </div>
+        <div class="container signin">
+            <p>Already have an account?
+                <a href="#/login">Sign in</a>.</p>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        $("#registerForm").on("submit", function (event) {
+            let isValid = true;
+            $("#usernameValidation").text('');
+            $("#passwordValidation").text('');
+
+            if (!(/^[A-Za-z]{3,}$/.test($("input[name='username']").val()))) {
+                isValid = false;
+                $("#usernameValidation").text("Invalid field!");
+            }
+            if (!(/^[A-Za-z0-9]{6,}$/.test($("input[name='password']").val()))) {
+                isValid = false;
+                $("#passwordValidation").text("Invalid password!");
+            }
+            if ($("input[name='password']").val() !== $("input[name='repeatPass']").val()) {
+                isValid = false;
+                $("#passwordValidation").text("Both password field should be the same!");
+            }
+            if (!isValid) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        })
+    })
+</script>
