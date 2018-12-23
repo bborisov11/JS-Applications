@@ -1,0 +1,54 @@
+<section class="register">
+    <form id="registerForm" action="#/register" method="post">
+        <fieldset>
+            <legend>Register</legend>
+            <p class="field">
+                <label for="username">Username</label>
+                <span class="input">
+                                <input type="text" name="username" id="username" placeholder="Username" />
+                                <span class="actions"></span>
+                                <i class="fas fa-user"></i>
+                            </span>
+            <div id="usernameValidation" class="text-danger"></div>
+            </p>
+            <p class="field">
+                <label for="password">Password</label>
+                <span class="input">
+                                <input type="password" name="password" id="password" placeholder="Password" />
+                                <span class="actions"></span>
+                                <i class="fas fa-key"></i>
+                            </span>
+            <div id="passwordValidation" class="text-danger"></div>
+            </p>
+            <input class="button" type="submit" class="submit" value="Register" />
+        </fieldset>
+    </form>
+</section>
+<script>
+   $(function () {
+       $("#registerForm").on("submit", function (event) {
+           console.log("test");
+           let isValid = true;
+           $("#usernameValidation").text('');
+           $("#passwordValidation").text('');
+           let username = $("#username");
+           let password = $("#password");
+           console.log(username.val());
+           if (username.val().length < 3) {
+               isValid = false;
+               console.log("username")
+               $("#usernameValidation").text("Username must be at least 3 symbols");
+           }
+           if(password.val().length < 6) {
+               isValid = false;
+               console.log("password")
+               $("#passwordValidation").text("Password must be at least 6 symbols");
+           }
+           if (!isValid) {
+               event.preventDefault();
+               event.stopPropagation();
+           }
+       })
+   })
+
+</script>
